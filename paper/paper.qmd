@@ -21,12 +21,14 @@ bibliography: references.bib
 #install.packages("tidyverse")
 #install.packages("here")
 #install.packages("knitr")
+#install.packages("rmarkdown")
 
 library(here)
 library(knitr)
 library(tidyverse)
 library(haven)
 library(dplyr)
+library(rmarkdown)
 ```
 
 ```{r}
@@ -39,6 +41,7 @@ wwoh_data <-
   read_csv(
     file = here("data/analysis_data/cleaned_data.csv"))
 ```
+
 \newpage
 
 
@@ -46,9 +49,9 @@ wwoh_data <-
 
 In the landscape marked by rapid socio-economic transformations, Saudi Arabia continues to grapple with the enduring issue of gender inequality, manifesting in various forms of discrimination and unbalanced treatments towards women. In spite of recent reforms targeted at enhancing women’s rights, such as allowing women to drive and easing guardianship laws, challenges continue to persist in employment opportunities, legal rights, and societal expectations. This system is deeply rooted in cultural norms and a conservative interpretation of Islamic law, which collectively hinder women’s participation in society and public life. 
 
-With the constantly changing political landscape of Saudi Arabia, it is essential to consider sentiment in regards to the increasing presence of women in society. While it is known that Saudi Arabia and many other middle-eastern countries fall behind progressive nations in terms of legal women rights, there is a void of information in regards to whether the social sentiment is changing. Bursztyn, Gonzalez, and Yanagizawa-Drott directly address this issue by investigating the opinions of married men in Saudi Arabia (Bursztyn). 
+With the constantly changing political landscape of Saudi Arabia, it is essential to consider sentiment in regards to the increasing presence of women in society. While it is known that Saudi Arabia and many other middle-eastern countries fall behind progressive nations in terms of legal women rights, there is a void of information in regards to whether the social sentiment is changing. Bursztyn, Gonzalez, and Yanagizawa-Drott directly address this issue by investigating the opinions of married men in Saudi Arabia @paper. 
 
-Pluralistic ignorance describes the misalignment between private and public beliefs (). In the context of the paper by Bursztyn et.al. (year), it illustrates the discrepancy between an individual’s private support for women working outside the home (WWOH) and their belief of public opposition. The above authors’ findings suggest that the vast majority of married men aged 18-35 underestimate societal support for female employment, despite private beliefs that align more with progressive values. This gap between private attitudes and perceived social expectations highlights the need for interventions that accurately communicate societal beliefs to bridge the divide (Bursztyn). 
+Pluralistic ignorance describes the misalignment between private and public beliefs XX. In the context of the paper by Bursztyn et.al. (2020), it illustrates the discrepancy between an individual’s private support for women working outside the home (WWOH) and their belief of public opposition. The above authors’ findings suggest that the vast majority of married men aged 18-35 underestimate societal support for female employment, despite private beliefs that align more with progressive values. This gap between private attitudes and perceived social expectations highlights the need for interventions that accurately communicate societal beliefs to bridge the divide @paper. 
 
 This paper will reproduce Bursztyn, Gonzalez, and Yanagizawa-Drott’s findings, while applying a demographic focused lens to establish if certain variables such as age or education have a bearing on support for WWOH. In particular, our paper will replicate the following three research claims:
 
@@ -62,9 +65,9 @@ For this paper, our estimand is the difference between the married men's guess o
 # Data {#sec-data}
 
 ## Data source and collection
-The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (year). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @citeR using packages **tidyverse** @tidyverse, **knitr** @knitr, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. Although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 (). The data was similarly uploaded at the same time and has not been updated since.
+The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. Although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since.
 
-More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia ().
+More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper.
 
 
 # Results {#sec-results}
@@ -74,9 +77,8 @@ The data collected from the experiment can be introduced through summary statist
 
 ```{r}
 #| echo: false
-#| label: tbl-sum
-#| fig-cap: Summary Statistics on Men Who Participated in the Main Experiment
-
+#| label: tbl-summ
+#| tbl-cap: Summary Statistics on Men Who Participated in the Main Experiment
 summary_stats <- wwoh_data |>
   group_by(condition2) |>
   summarize(
@@ -87,14 +89,13 @@ summary_stats <- wwoh_data |>
     "Employed(%)" = sum(employed_now, na.rm = TRUE)/n()*100,
   ) |>
   bind_rows()|>
-  mutate(group = c("Control", "Treatment")) |>
-  select(condition2, everything()) 
+  mutate(group = c("Control", "Treatment"))
 
 summary_stats |> kable()
 
 summary_all <- wwoh_data |>
   summarize(
-    Observations = n(),
+    Total = n(),
     Age = mean(age, na.rm =TRUE),
     Children = mean(children, na.rm = TRUE),
     "College" = sum(college_deg, na.rm = TRUE)/n()*100,
@@ -105,8 +106,32 @@ summary_all |> kable()
 
 ```
 
-As seen in @tbl-sum above, there are less than 500 data points present after removing single men as well as any empty data points used in the making of the summary statistics, contrary to the claims of Bursztyn et.al.
+As seen in @tbl-summ above, there are less than 500 data points present after removing single men as well as any empty data points used in the making of the summary statistics, contrary to the claims of Bursztyn et.al.
+```{r}
 
+```
+
+```{r}
+#| echo: false
+#| label: fig-time
+#| fig-cap: Density Histogram of Percentage Wedge
+cleaned_data <- wwoh_data |>
+  mutate(percentage_wedge = outside_wedge/30*100)
+
+p <- ggplot(cleaned_data, aes(x = percentage_wedge)) + 
+  geom_histogram(aes(y = after_stat(density)), binwidth = 8, fill = "green", alpha = 0.6, color = "black") + 
+  labs(
+       x = "Percentage Wedge Value",
+       y = "Density",
+       caption = "Distribution of the difference between beliefs on what percentage people support WWOH and actual percentage of people that support WWOH. The values were calculated as (participants guess about percent of session participants that agree with WWOH - the actual percentage of participants that agree with WWOH") + 
+  theme_minimal() +
+  theme(plot.caption = element_text(hjust = 0, face = "italic", size = 10),
+        plot.caption.position = "plot") +
+  scale_x_continuous(limits = c(-100, 100))
+
+print(p)
+```
+In @fig-time, we plotted the “wedge” between the participant’s belief in what percentage of others would support WWOH and how many participants actually supported WWOH. In assessing the distribution of these wedges throughout all sessions, the data revealed that a substantial majority (72%) of the participants consistently undervalue the level of endorsement for WWOH within their session cohorts. On average, this wedge is observed to be a 24 percentage points difference, aligning very similarly with the conclusions drawn from the original paper @paper. 
 
 
 
