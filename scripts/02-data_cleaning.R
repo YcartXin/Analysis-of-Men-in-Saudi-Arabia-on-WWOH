@@ -1,0 +1,27 @@
+#### Preamble ####
+# Purpose: Cleans the downloaded Saudi Arabia survey data for married men on giving consent to wife working outside of home.
+# Author: Tracy Yang, Alex Sun
+# Date: 12 February 2024
+# Contact: ycart.yang@mail.utoronto.ca; boyalexsun@gmail.com
+# License: MIT
+# Pre-requisites: 01-download_data.R
+
+#### Workspace setup ####
+library(tidyverse)
+library(janitor)
+library(dplyr)
+library(haven)
+
+#### Clean data ####
+raw_data <- read_dta("inputs/data/01_main_exp_clean.dta")
+
+#taking out NA data from age variable as well as single men in the survey.
+cleaned_data <- raw_data |> clean_names() |> na.omit(age)|> mutate(
+  age_groups = case_when(
+  age <= 23 ~ 1,
+  age >= 30 ~ 3,
+  TRUE ~ 2)) |> filter(married == 1)
+
+
+#### Save data ####
+write_csv(cleaned_data, "outputs/data/cleaned_data.csv")

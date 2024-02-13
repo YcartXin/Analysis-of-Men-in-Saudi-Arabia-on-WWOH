@@ -1,0 +1,82 @@
+---
+title: "The Analysis of Pluralistic Ignorance of Married Men in Saudi Arabia on Women Working Outside of Home (WWOH) ^[Code and data are available at: ]"
+author: 
+  - Tracy Yang
+  - Alex Sun
+thanks: "Code and data are available at: LINK."
+date: today
+date-format: long
+abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+#install.packages("tidyverse")
+#install.packages("here")
+#install.packages("knitr")
+
+library(here)
+library(knitr)
+library(tidyverse)
+library(haven)
+library(dplyr)
+```
+
+```{r}
+#Acquiring cleaned data from output folder
+wwoh_data <-
+  read_csv(
+    file = here("outputs/data/cleaned_data.csv"))
+```
+\newpage
+
+
+# Introduction
+
+You can and should cross-reference sections and sub-sections. 
+
+The remainder of this paper is structured as follows. @sec-data....
+
+
+
+# Data {#sec-data}
+
+
+```{r}
+#| echo: false
+#| label: tbl-sum
+#| fig-cap: Summary Statistics on Saudi Arabian Men Participated in Survey on WWOH
+
+summary_stats <- wwoh_data |>
+  group_by(condition2) |>
+  summarize(
+    Observations = n(),
+    Mean_age = mean(age, na.rm =TRUE),
+    Mean_children = mean(children, na.rm = TRUE),
+    Percent_college = sum(college_deg, na.rm = TRUE)/n()*100,
+    Percent_employed = sum(employed_now, na.rm = TRUE)/n()*100,
+  ) |>
+  bind_rows()|>
+  mutate(group = c("Control", "Treatment")) |>
+  select(condition2, everything()) 
+
+summary_stats |> kable()
+
+summary_all <- wwoh_data |>
+  summarize(
+    Observations = n(),
+    Mean_age = mean(age, na.rm =TRUE),
+    Mean_children = mean(children, na.rm = TRUE),
+    Percent_college = sum(college_deg, na.rm = TRUE)/n()*100,
+    Percent_employed = sum(employed_now, na.rm = TRUE)/n()*100)
+    
+summary_all |> kable()
+
+
+```
