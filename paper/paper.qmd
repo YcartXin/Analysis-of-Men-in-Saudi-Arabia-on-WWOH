@@ -1,13 +1,14 @@
 ---
-title: "The Analysis of Pluralistic Ignorance of Married Men in Saudi Arabia on Women Working Outside of Home (WWOH) ^[Code and data are available at: ]"
+title: "The Analysis of Pluralistic Ignorance of Married Men in Saudi Arabia on Women Working Outside of Home (WWOH) ^[Code and data are available at: https://github.com/YcartXin/Analysis-of-Men-in-Saudi-Arabia-on-WWOH]"
 author: 
   - Tracy Yang
   - Alex Sun
-thanks: "Code and data are available at: LINK."
 date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
-format: pdf
+format: 
+  typst:
+    toc: true
 number-sections: true
 bibliography: references.bib
 ---
@@ -29,23 +30,44 @@ library(dplyr)
 ```
 
 ```{r}
+#| include: false
+#| warning: false
+#| message: false
+
 #Acquiring cleaned data from output folder
 wwoh_data <-
   read_csv(
-    file = here("outputs/data/cleaned_data.csv"))
+    file = here("data/analysis_data/cleaned_data.csv"))
 ```
 \newpage
 
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. 
+In the landscape marked by rapid socio-economic transformations, Saudi Arabia continues to grapple with the enduring issue of gender inequality, manifesting in various forms of discrimination and unbalanced treatments towards women. In spite of recent reforms targeted at enhancing women’s rights, such as allowing women to drive and easing guardianship laws, challenges continue to persist in employment opportunities, legal rights, and societal expectations. This system is deeply rooted in cultural norms and a conservative interpretation of Islamic law, which collectively hinder women’s participation in society and public life. 
 
-The remainder of this paper is structured as follows. @sec-data....
+With the constantly changing political landscape of Saudi Arabia, it is essential to consider sentiment in regards to the increasing presence of women in society. While it is known that Saudi Arabia and many other middle-eastern countries fall behind progressive nations in terms of legal women rights, there is a void of information in regards to whether the social sentiment is changing. Bursztyn, Gonzalez, and Yanagizawa-Drott directly address this issue by investigating the opinions of married men in Saudi Arabia (Bursztyn). 
 
+Pluralistic ignorance describes the misalignment between private and public beliefs (). In the context of the paper by Bursztyn et.al. (year), it illustrates the discrepancy between an individual’s private support for women working outside the home (WWOH) and their belief of public opposition. The above authors’ findings suggest that the vast majority of married men aged 18-35 underestimate societal support for female employment, despite private beliefs that align more with progressive values. This gap between private attitudes and perceived social expectations highlights the need for interventions that accurately communicate societal beliefs to bridge the divide (Bursztyn). 
+
+This paper will reproduce Bursztyn, Gonzalez, and Yanagizawa-Drott’s findings, while applying a demographic focused lens to establish if certain variables such as age or education have a bearing on support for WWOH. In particular, our paper will replicate the following three research claims:
+
++ The vast majority of married men in Saudi Arabia privately support WWOH
++ The married men massively underestimate the level of support from other men in their communities
++ Correcting these beliefs about others’ feelings will affect their wives decisions to work.
+
+For this paper, our estimand is the difference between the married men's guess on how many people in their survey group support WWOH and the actual percentage of people in their group that support WWOH.
+
+The remainder of this paper is structured as follows. We will first describe our data sources in @sec-data (Data), followed by a description of the variables and methodologies utilized by the original paper in @sec-results (Results). We will then conduct a reproduction of certain figures and results to verify the original paper’s findings in the same section. Afterwards, we will summarize our results when compared to the original paper. We will additionally conduct an in-depth examination of how various demographics affect the support for WWOH. Lastly, in @sec-discussion (Discussion), we will discuss the findings from @sec-results (Results) in context.
 
 
 # Data {#sec-data}
+
+
+
+
+# Results {#sec-results}
+
 
 
 ```{r}
@@ -80,3 +102,50 @@ summary_all |> kable()
 
 
 ```
+
+Our results are summarized in @tbl-modelresults.
+
+
+
+
+# Discussion {#sec-discussion}
+
+## First discussion point {#sec-first-point}
+
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+
+## Second discussion point
+
+## Third discussion point
+
+## Weaknesses and next steps
+
+Weaknesses and next steps should also be included.
+
+\newpage
+
+\appendix
+
+# Appendix {-}
+
+
+# Additional data details
+
+
+## Posterior predictive check
+
+
+
+## Diagnostics
+
+
+
+
+
+\newpage
+
+
+# References
+
+
+
