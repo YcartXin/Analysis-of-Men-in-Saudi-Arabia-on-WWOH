@@ -62,7 +62,7 @@ For this paper, our estimand is the difference between the married men's guess o
 # Data {#sec-data}
 
 ## Data source and collection
-The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (year). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in R [6] using packages tidyverse [7], knitr [8], dplyr [9], ggplot2 [10], knitr [8], and here [11]. Although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 (). The data was similarly uploaded at the same time and has not been updated since.
+The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (year). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @citeR using packages **tidyverse** @tidyverse, **knitr** @knitr, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. Although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 (). The data was similarly uploaded at the same time and has not been updated since.
 
 More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia ().
 
@@ -75,16 +75,16 @@ The data collected from the experiment can be introduced through summary statist
 ```{r}
 #| echo: false
 #| label: tbl-sum
-#| fig-cap: Summary Statistics on Saudi Arabian Men Participated in Survey on WWOH
+#| fig-cap: Summary Statistics on Men Who Participated in the Main Experiment
 
 summary_stats <- wwoh_data |>
   group_by(condition2) |>
   summarize(
     Observations = n(),
-    Mean_age = mean(age, na.rm =TRUE),
-    Mean_children = mean(children, na.rm = TRUE),
-    Percent_college = sum(college_deg, na.rm = TRUE)/n()*100,
-    Percent_employed = sum(employed_now, na.rm = TRUE)/n()*100,
+    Age = mean(age, na.rm =TRUE),
+    Children = mean(children, na.rm = TRUE),
+    "College(%" = sum(college_deg, na.rm = TRUE)/n()*100,
+    "Employed(%)" = sum(employed_now, na.rm = TRUE)/n()*100,
   ) |>
   bind_rows()|>
   mutate(group = c("Control", "Treatment")) |>
@@ -145,9 +145,5 @@ Weaknesses and next steps should also be included.
 
 
 \newpage
-
-
-# References
-
 
 
