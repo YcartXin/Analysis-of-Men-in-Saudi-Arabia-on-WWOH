@@ -2,6 +2,7 @@
 
 ## Overview
 This repo features a replication of Bursztyn, Gonzalez, and Yanagizawa-Drott's paper "Misperceived Social Norms: Women Working Outside the Home in Saudi Arabia" as well as further analysis using their collected data. It analyses the private support of many married Saudi Arabian man on women working outside the home while believing in the opposition of a majority of others, and how recognizing the support of other men increases their support for their wives to search for jobs. This paper will further analyze the demographic of the men who support women working outside the home.
+
 The replication and analysis is conducted through Rstudio using "R version 4.3.2 (2023-10-31)
 
 ## File Structure

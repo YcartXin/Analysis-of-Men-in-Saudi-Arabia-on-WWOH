@@ -4,7 +4,7 @@
 # Date: 12 February 2024
 # Contact: ycart.yang@mail.utoronto.ca; boyalexsun@gmail.com
 # License: MIT
-# Pre-requisites: 01-download_data.R
+# Pre-requisites: None
 
 #### Workspace setup ####
 library(tidyverse)

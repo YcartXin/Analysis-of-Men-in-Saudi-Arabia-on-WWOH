@@ -21,14 +21,12 @@ bibliography: references.bib
 #install.packages("tidyverse")
 #install.packages("here")
 #install.packages("knitr")
-#install.packages("rmarkdown")
 
 library(here)
 library(knitr)
 library(tidyverse)
 library(haven)
 library(dplyr)
-library(rmarkdown)
 ```
 
 ```{r}
@@ -65,10 +63,16 @@ For this paper, our estimand is the difference between the married men's guess o
 # Data {#sec-data}
 
 ## Data source and collection
-The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. Although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since.
+The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since.
 
-More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper.
+More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper. However, the data's sampling methodology also contains flaws. There is incongruity between what the paper claims the data to be and what the data shows. For example, although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The participants' highest education also ranges from a secondary degree to a doctorate degree even though the original paper claims that they sampled with lowest some kind of college degree @paper. The secondary degree participants, however, will not be removed from the data set as they do not affect the purpose of the analysis, and further investigation on the effect of education on the support of WWOH will be conducted in @sec-results. The sample of 500 men with some removed due to empty data points and others due to attribute qualifications is quite small to be very representative of the male population in Saudi Arabia. The cleaned data will be further explored in @sec-explore.
 
+
+## Exploring the data {#sec-explore}
+After the data cleaning process, relevant variables are left 
+
+
+## Measurement
 
 # Results {#sec-results}
 In this section, we will replicate some of the graphs, tables, and findings in the original paper.
