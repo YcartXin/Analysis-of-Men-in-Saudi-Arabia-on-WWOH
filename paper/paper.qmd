@@ -35,17 +35,21 @@ library(dplyr)
 #| message: false
 
 #Acquiring cleaned data from output folder
+online_cleaned <-
+   read_csv(
+    file = here("data/analysis_data/online_cleaned.csv"))
 wwoh_data <-
   read_csv(
-    file = here("data/analysis_data/cleaned_data.csv"))
+    file = here("data/analysis_data/main_cleaned.csv"))
+
 ```
 
 \newpage
 
 
-# Introduction
+# Introduction {#sec-intro}
 
-In the landscape marked by rapid socio-economic transformations, Saudi Arabia continues to grapple with the enduring issue of gender inequality, manifesting in various forms of discrimination and unbalanced treatments towards women. In spite of recent reforms targeted at enhancing women’s rights, such as allowing women to drive and easing guardianship laws, challenges continue to persist in employment opportunities, legal rights, and societal expectations. This system is deeply rooted in cultural norms and a conservative interpretation of Islamic law, which collectively hinder women’s participation in society and public life. 
+In the landscape marked by rapid socio-economic transformations, Saudi Arabia continues to grapple with the enduring issue of gender inequality, manifesting in various forms of discrimination and unbalanced treatments towards women. In spite of recent reforms targeted at enhancing women’s rights, such as allowing women to drive and easing guardianship laws, challenges continue to persist in employment opportunities, legal rights, and societal expectations. This system is deeply rooted in cultural norms and a conservative interpretation of Islamic law, which collectively hinder women’s participation in society and public life.
 
 With the constantly changing political landscape of Saudi Arabia, it is essential to consider sentiment in regards to the increasing presence of women in society. While it is known that Saudi Arabia and many other middle-eastern countries fall behind progressive nations in terms of legal women rights, there is a void of information in regards to whether the social sentiment is changing. Bursztyn, Gonzalez, and Yanagizawa-Drott directly address this issue by investigating the opinions of married men in Saudi Arabia @paper. 
 
@@ -62,22 +66,57 @@ For this paper, our estimand is the difference between the married men's guess o
 
 # Data {#sec-data}
 
-## Data source and collection
-The data used in this analysis - Main Experiment of Saudi Arabia men on WWOH and their beliefs of others’ opinions  - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an experiment and repeated surveys with a treatment group and a control group. This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since.
+## Data source
+This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since. There are two data sets out of others collected in the original research that this paper will utilize.
 
-More specifically, the sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper. However, the data's sampling methodology also contains flaws. There is incongruity between what the paper claims the data to be and what the data shows. For example, although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The participants' highest education also ranges from a secondary degree to a doctorate degree even though the original paper claims that they sampled with lowest some kind of college degree @paper. The secondary degree participants, however, will not be removed from the data set as they do not affect the purpose of the analysis, and further investigation on the effect of education on the support of WWOH will be conducted in @sec-results. The sample of 500 men with some removed due to empty data points and others due to attribute qualifications is quite small to be very representative of the male population in Saudi Arabia. The cleaned data will be further explored in @sec-explore.
+The first data used in this analysis - "1st Online Survey Clean" - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an online survey with a treatment group and a control group. This imported data contains 1460 observations and 21 variables.
+
+The second data used in this analysis - "Main Experiment Clean" - is also sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through a more selective filtering process with an experiment conducted in-person with a treatment group and a control group. This data contains 500 observations and 36 variables.
+
+## Measurement and collection
+The "1st Online Survey Clean" will only be used to conduct analysis on the support of married Saudi Arabian men on women working outside of home. Therefore, its selection process is not extremely extensive. The qualifying characteristics are marriage status (married) and age (18-35). This survey was conducted nationally and anonymously. The other aspects of this survey is not further discussed as the data will not be used in this paper.
+
+However, the main experiment data needs a more extensive examination. The sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper. The requirement for the men to sampled includes being married, having a cell phone (for easy reach and communication), and having minimum some kind of college education @paper. All qualifying subjects were invited to a hotel to conduct the experiment portion in-person. The men were separated into groups of 30 with the average participant knowing 15 out of the 29 of other participants @paper. They were then surveyed on WWOH and whether they would support their wives working outside of home. The research team then reveals the opinions of other participants in the room and distributes another survey on whether the participants would support their wives working outside of home. 
+
+Even though the data imported has already been cleaned, it is not in the state that can be directly used in this paper. The cleaning process will keep XX as they are relevant to replicate the targeted aspects and the following analysis. Additionally, the main experiment's raw data's sampling methodology also contains flaws. There is incongruity between what the paper claims the data to be and what the data shows. For example, although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The participants' highest education also ranges from a secondary degree to a doctorate degree even though the original paper claims that they sampled men with lowest college degree @paper. The secondary degree participants, however, will not be removed from the data set as they do not affect the purpose of the analysis, and further investigation on the effect of education on the support of WWOH will be conducted in @sec-results. The sample of 500 men with some removed due to empty data points and others due to attribute qualifications is quite small to be very representative of the male population in Saudi Arabia. The cleaned data will be further explored in @sec-explore.
 
 
 ## Exploring the data {#sec-explore}
-After the data cleaning process, relevant variables are left 
+After the data cleaning process, irrelevant variables were removed along with empty responses. The online survey data now consists of only one variable with 728 observations. The variable signifies whether the respondent supports women working outside of home.
+
+@tbl-sampleonline shows what the online national survey data looks like after cleaning.
+
+```{r}
+#| echo: false
+#| label: tbl-sampleonline
+#| tbl-cap: Sample of Cleaned Online National Survey Data of Saudi Arabian Men on WWOH
+online_cleaned |> slice(1:5) |> kable()
+
+```
+
+For the cleaned main experiment data, irrelevant variables and empty responses were also deleted. It now consists of XX observations with XX variables. 
+The variables are listed and explained below:
 
 
-## Measurement
+
+@tbl-samplemain shows what the cleaned data for the main experiment looks like.
+```{r}
+#| echo: false
+#| label: tbl-samplemain
+#| tbl-cap: Sample of Cleaned Main Experiment Data of Saudi Arabian Men on WWOH
+wwoh_data |> slice(1:5) |> kable()
+
+```
+
+
 
 # Results {#sec-results}
-In this section, we will replicate some of the graphs, tables, and findings in the original paper.
+This section will first affirm the findings in the original paper with the cleaned data. As stated in @sec-intro, the three main claims made by Bursztyn et.al are:
++ The vast majority of married men in Saudi Arabia privately support WWOH.
++ The married men massively underestimate the level of support from other men in their communities.
++ Correcting these beliefs about others’ feelings will affect the outcome of whether the married man's wife work.
 
-The data collected from the experiment can be introduced through summary statistics.
+Before manipulating the data into graphs and tables to test these claims, we can first understand the cleaned data better with summary statistics. 
 
 ```{r}
 #| echo: false
@@ -110,19 +149,17 @@ summary_all |> kable()
 
 ```
 
-As seen in @tbl-summ above, there are less than 500 data points present after removing single men as well as any empty data points used in the making of the summary statistics, contrary to the claims of Bursztyn et.al.
-```{r}
+As seen in @tbl-summ above, there are less than 500 data points present in the cleaned data. From these data points, we can test 
 
-```
 
 ```{r}
 #| echo: false
 #| label: fig-time
 #| fig-cap: Density Histogram of Percentage Wedge
-cleaned_data <- wwoh_data |>
+histogram <- wwoh_data |>
   mutate(percentage_wedge = outside_wedge/30*100)
 
-p <- ggplot(cleaned_data, aes(x = percentage_wedge)) + 
+p <- ggplot(histogram, aes(x = percentage_wedge)) + 
   geom_histogram(aes(y = after_stat(density)), binwidth = 8, fill = "green", alpha = 0.6, color = "black") + 
   labs(
        x = "Percentage Wedge Value",
