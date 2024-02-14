@@ -1,24 +1,24 @@
 # Starter folder
 
 ## Overview
-
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
-To use this folder, click the green "Code" button", then "Download ZIP". Move the downloaded folder to where you want to work on your own computer, and then modify it to suit.
-
+This repo features a replication of Bursztyn, Gonzalez, and Yanagizawa-Drott's paper "Misperceived Social Norms: Women Working Outside the Home in Saudi Arabia" as well as further analysis using their collected data. It analyses the private support of many married Saudi Arabian man on women working outside the home while believing in the opposition of a majority of others, and how recognizing the support of other men increases their support for their wives to search for jobs. This paper will further analyze the demographic of the men who support women working outside the home.
+The replication and analysis is conducted through Rstudio using "R version 4.3.2 (2023-10-31)
 
 ## File Structure
 
 The repo is structured as:
 
--   `data/raw_data` contains the raw data as obtained from X.
+-   `data/raw_data` contains the raw data as obtained from the American Economic Association website. Details provided below.
 -   `data/analysis_data` contains the cleaned dataset that was constructed.
--   `model` contains fitted models. 
--   `other` contains relevant literature, details about LLM chat interactions, and sketches.
+-   `other` contains initial sketches of the data and graphs.
 -   `paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper. 
 -   `scripts` contains the R scripts used to simulate, download and clean data.
 
 
 ## Statement on LLM usage
+Large Language Models are not used in the writing of any code nor analysis.
 
-Aspects of the code were written with the help of the auto-complete tool, Codriver. The abstract and introduction were written with the help of ChatHorse and the entire chat history is available in inputs/llms/usage.txt.
+## Data Source
+The raw data from this paper is obtained from the published article from the American Economics Review on the American Economic Association website. The article being replicated was published on October 2020 in VOL.100, NO. 10 of the AER.The data can be accessed through the ICPSR by signing in with an account, then downloading the replication package.
+
+Link to the AEA website: https://www.aeaweb.org/articles?id=10.1257/aer.20180975
