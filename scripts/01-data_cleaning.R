@@ -28,7 +28,9 @@ main_cleaned <- mainexp_raw_data |> clean_names() |>
 
 follow_cleaned <- follow_raw_data |> clean_names() |> 
   na.omit(age) |>
-  select(employed_3mos_out_fl, employed_now_out_fl) |> na.omit() 
+  select(employed_3mos_out_fl, employed_now_out_fl, condition2) |> na.omit() |>
+  rename(emply_prev = employed_3mos_out_fl) |>
+  rename(emply_now = employed_now_out_fl)
 
 online_cleaned <- online_raw_data |> clean_names() |> 
   select(c_outside_self)|>

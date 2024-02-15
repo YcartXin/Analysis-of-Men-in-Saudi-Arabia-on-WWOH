@@ -21,6 +21,8 @@ bibliography: references.bib
 #install.packages("tidyverse")
 #install.packages("here")
 #install.packages("knitr")
+#install.packages("kableExtra")
+#install.packages("webshot")
 
 library(here)
 library(knitr)
@@ -48,7 +50,6 @@ sec_cleaned <-
    read_csv(
     file = here("data/analysis_data/sec_cleaned.csv"))
 
-  
 ```
 
 \newpage
@@ -131,6 +132,7 @@ The first claim can be easily explored using the cleaned national online survey 
 #| echo: false
 #| label: fig-wwoh
 #| fig-cap: Support of Young Married Men in Saudi Arabia of WWOH
+
 online_cleaned |> 
   ggplot(aes(x = c_outside_self)) +
   geom_bar() +
@@ -170,44 +172,83 @@ summary_all <- main_cleaned |>
     
 summary_all |> kable()
 
-
 ```
 
 As seen in @tbl-summ above, there are less than 500 data points present in the cleaned data. From these data points, we can test the claim that married men massively underestimate the level of support from other men in their communities. The surveys from the main experiment asked the participants about their predictions of how many others in the group of 30 (from 0 to 29) of many they know of, would support WWOH. The percentage difference between their beliefs and the actual calculated number is shown as wedges in @fig-time. This graph shows the distribution of the difference between beliefs on what percentage people support WWOH and actual percentage of people that support WWOH. The values were calculated as (participants guess about percent of session participants that agree with WWOH - the actual percentage of participants that agree with WWOH).
 
-
 ```{r}
 #| echo: false
 #| label: fig-time
-#| fig-cap: Density Histogram of Percentage Wedge
+#| fig-cap: Density Histogram of Percentage Wedge on Difference Between Beliefs and Actual Calculation
 histogram <- main_cleaned |>
   mutate(percentage_wedge = outside_wedge/30*100)
 
 p <- ggplot(histogram, aes(x = percentage_wedge)) + 
   geom_histogram(aes(y = after_stat(density)), binwidth = 8, fill = "green", alpha = 0.6, color = "black") + 
   labs(
-       x = "Percentage Wedge Value",
-       y = "Density") + 
+    x = "Percentage Wedge Value",
+    y = "Density") + 
   theme_minimal() +
   theme(plot.caption = element_text(hjust = 0, face = "italic", size = 10),
         plot.caption.position = "plot") +
   scale_x_continuous(limits = c(-100, 100))
-
 print(p)
+
 ```
+
 In @fig-time, from assessing the distribution of these wedges throughout all sessions, the data revealed that a substantial majority (72%) of the participants consistently undervalue the level of endorsement for WWOH within their session cohorts. On average, this wedge is observed to be a 24 percentage points difference, aligning very similarly with the conclusions drawn from the original paper @paper. Thus, the second claim of that married men massively underestimate the level of support from other men in their communities is further substantiated.
+
+The last claim this replication paper is going to focus on is that correcting beliefs about others' feelings will affect the outcome of whether the married man's wife works. In the main experiment done by Bursztyn et.al, a follow up survey three months later records the difference in the participant's wife's employment difference @paper. As the men experienced learning about others' surprisingly supportive views on WWOH during the first survey, this three-month difference in wifes' employments maybe attributed to the correcting of beliefs. The difference is shown in  below.
+
+
+```{r}
+#| echo: false
+#| label: tbl-empl
+#| tbl-cap: Employment Difference of Wives between Two Surveys Three Months Apart
+#| tbl-subcap: ["Treatment", "Control"]
+#| layout-ncol: 2
+
+follow_cleaned |> filter(condition2==1) |>
+  count(emply_prev, emply_now) |> kable()
+
+follow_cleaned |> filter(condition2==0) |>
+  count(emply_prev, emply_now) |> kable()
+
+```
+As seen in @tbl-empl, there are slight differences between the treatment and control group in terms of the participants' wives employment since the first survey.
 
 
 
 # Discussion {#sec-discussion}
 
-## First discussion point {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
 
-## Second discussion point
 
-## Third discussion point
+
+
+```{r}
+#| echo: false
+#| label: fig-diss
+#| fig-cap: Frequency of WWOH Discussions for Participants in Survey
+
+chart <- sec_cleaned |>
+  mutate(freq = case_when(
+    discuss_freq == 1 ~ "Very Often",
+    discuss_freq == 2 ~ "Often",
+    discuss_freq == 3 ~ "Sometimes",
+    discuss_freq == 4 ~ "Rarely",
+    discuss_freq == 5 ~ "Very Rarely"))
+
+chart |>
+  ggplot(mapping = aes(x = freq)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(x = "Age group", y = "Number of observations")
+
+```
+
+
+
 
 ## Weaknesses and next steps
 
@@ -215,13 +256,6 @@ Weaknesses and next steps should also be included.
 
 \newpage
 
-\appendix
-
-# Appendix {-}
-
-
-
-## Diagnostics
 
 
 

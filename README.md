@@ -23,3 +23,4 @@ Large Language Models are not used in the writing of any code nor analysis.
 The raw data from this paper is obtained from the published article from the American Economics Review on the American Economic Association website. The article being replicated was published on October 2020 in VOL.100, NO. 10 of the AER.The data can be accessed through the ICPSR by signing in with an account, then downloading the replication package.
 
 Link to the AEA website: https://www.aeaweb.org/articles?id=10.1257/aer.20180975
+Replication graphs are in scripts, 99-replications.R.
