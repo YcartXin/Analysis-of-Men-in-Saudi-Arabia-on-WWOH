@@ -5,7 +5,7 @@ author:
   - Alex Sun
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This study replicates and expands upon the seminal work of Bursztyn, Gonzalez, and Yanagizawa-Drott to explore attitudes toward women working outside the home (WWOH) among young married men in Saudi Arabia. Our findings confirm that a significant majority of this demographic privately endorses WWOH while concurrently underestimating the extent of support among their peers. When participants' misconceptions were corrected, there was a notable increase in their willingness to assist their wives in job searching, a behavior that incurs personal cost. Furthermore, we investigated how varying demographics affected support values. We propose that future research should focus on the dissemination of information regarding gender norms and the role of social networks in shaping labor market behaviors. This could pave the way for policy interventions aimed at reducing gender disparities in the workforce and fostering a more accurate reflection of societal values."
 format: 
   typst:
     toc: true
@@ -95,9 +95,17 @@ Lastly, the data set "Follow Up Clean" is information from the follow up survey 
 ## Exploring the data {#sec-explore}
 After the data cleaning process, irrelevant variables were removed along with empty responses. The online survey data now consists of only one variable with 728 observations. The variable "c_outside_self" signifies whether the respondent supports women working outside of home. The follow up data now consists of 361 observations with three variables: "emply_prev", "emply_now", "condition2". The second main experiment data includes 702 observations and 1 variable as well, which is the frequency of discussion of WWOH issues.
 
-For the cleaned main experiment data, irrelevant variables and empty responses were also deleted. It now consists of XX observations with XX variables. 
+For the cleaned main experiment data, irrelevant variables and empty responses were also deleted. It now consists of 482 observations with 8 variables. 
 The variables are listed and explained below:
 
++ age
++ education which has five different categories: Secondary, Middle, Diploma, Bachelor, Masters, Ph.D, and Post Graduates
++ outside_self refers to whether the participant supports WWOH [0,1]
++ condition2 signifies treatment group when 1 and control group when 0
++ employed_now records whether the participant is currently employed
++ college_deg is another dummy variable referring to whether the participant has a college degree
++ children refers to how many children the participant and his wife has
++ outside_wedge is the difference in the belief between how many people in the group of 30 the participant believes would support WWOH and the actual number
 
 
 @tbl-samplemain shows what the cleaned data for the main experiment looks like.
@@ -269,13 +277,27 @@ ageimpact |>
   theme(legend.position = "bottom")
 
 ```
-From @fig-age, there is a surprising trending of decreasing opposers of WWOH as Saudi Arabian men grew older.
+From @fig-age, there is an interesting trending of decreasing opposers of WWOH as Saudi Arabian men grew older. The age group of 18 to 23 has the smallest propotion of WWOH supporters. However, it is difficult to compare the 30 to 35 age group as its sample size is much smaller. Nonetheless, younger man may be more opposed to WWOH as older men have a more stablized home with children to take care of.
+
 
 # Discussion {#sec-discussion}
 
+## Findings
+In this paper, we replicated the results of Bursztyn, Gonzalez, and Yanagizawa-Drott. The paper sought to assert that majority of married Saudi Arabian men support women working outside the home. From the data, we have replicated the following major findings:
+The vast majority of married Saudi Arabian men support WWOH
+Married men vastly underestimate the level of support from other married men
+Correcting these beliefs about others’ feelings will affect the outcome of whether the married man’s wife works.
+
+	The original experiment discovered that nearly all participants significantly underestimated the overall support of WWOH. The survey data showed that while 83% of the participants are in favour of WWOH, the average perception is that only 56% are in favour; 82% of participants underestimated the support for WWOH.  
 
 
+## Bias & Weaknesses
+The design of this experiment may illicit response bias from participants. Within the lens of this progressive social study, the fact that participants responded to the surveys anonymously online may sway some of them to answer in ways that differed from their true beliefs. The study addresses potential limitations regarding such bias by implementing a list experiment to mitigate these concerns (Fisher, 1993). The list experiment composed of giving participants a list of topics and they were told to state how many they agreed with, but not indicate which ones those were. This method is known to reduce the effects of social desirability bias. Despite anonymity, concerns remained that participants might feel pressured to respond in socially acceptable ways. If true, the bias would have an impact on our estimand, altering the values found and depicted in @fig-time. The list experiment, providing plausible deniability, showed consistent support for women working outside the home, suggesting minimal bias impact. Additionally, comparison with the Arab Barometer's findings corroborated the study's external validity, indicating a long-standing high level of support for women working outside the home among Saudi men, thereby strengthening the study's reliability despite potential limitations.
 
+
+## Main Motivator Behind the Wedge Discrepancy
+
+The study consistently illustrates the impact of misperceived social norms on labor market decisions, specifically in the context of Saudi Arabia, where a significant gap between actual and perceived support for women working outside the home is observed. The underestimation of societal support for women's employment reflects deeper issues of communication within society. Speculatively, this misperception may stem from insufficient individual-to-individual communication, possibly exacerbated by mass media failing to accurately represent societal values. Further investigation into the role of communication reveals that personal connections influence perception accuracy. 
 
 
 ```{r}
@@ -299,18 +321,13 @@ chart |>
 
 ```
 
+An additional online survey aimed to delve deeper into these communication dynamics, highlights the fact that discussions about women working outside the home among male friends and relatives are infrequent. This lack of discourse correlates with larger gaps in perception versus reality, suggesting that minimal conversation contributes to widespread misperceptions. This correlation might also suggest a reverse causality, where the anticipation of conservative backlash inhibits open discussions, perpetuating a cycle of pluralistic ignorance. The lack of communication may not be entirely mass media’s failure to properly portray societal beliefs. When questioned, nearly 38% of participants very rarely discuss WWOH among their male friend circles. As shown in Figure _, the topic of WWOH is not very readily discussed among peers and colleagues. We hypothesize that this behaviour will extend onto social media, further supporting the idea that the perceived lack of support for WWOH is exacerbated by simply a deficiency in attention.
+
+## Demographic
 
 
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-
-
-
+## Future Research
+The study suggests several directions for future research, emphasizing the transformative potential of information dissemination on societal norms and labor market behaviors, particularly regarding female employment in Saudi Arabia and possibly beyond. It proposes expanding research to understand how information about gender norms spreads within social networks and its broader impacts. Additionally, it highlights the need to explore women's perspectives on labor participation, given their high reported support for working outside the home. Understanding the stigma against women's employment and the motivations behind male guardians' attitudes offers another fruitful avenue for developing targeted policy interventions. This research could contribute to strategies that more effectively address gender disparities in the workforce.
 
 
 \newpage
