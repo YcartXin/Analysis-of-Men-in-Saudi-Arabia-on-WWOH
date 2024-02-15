@@ -34,8 +34,11 @@ online_cleaned <- online_raw_data |> clean_names() |>
   select(c_outside_self)|>
   na.omit()
 
+sec_cleaned <- sec_raw_data |> clean_names() |>
+  select(discuss_freq) |> na.omit() 
+
 #### Save data ####
 write_csv(main_cleaned, "data/analysis_data/main_cleaned.csv")
 write_csv(follow_cleaned, "data/analysis_data/follow_cleaned.csv")
 write_csv(online_cleaned, "data/analysis_data/online_cleaned.csv")
-
+write_csv(sec_cleaned, "data/analysis_data/sec_cleaned.csv")
