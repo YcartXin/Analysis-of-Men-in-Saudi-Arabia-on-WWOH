@@ -210,35 +210,66 @@ follow_cleaned |> filter(condition2==0) |>
 As seen in @tbl-empl, there are slight differences between the treatment and control groups in terms of the participants' wives employment since the first survey. The number of women who moved from not working three months ago to now working is four in the treatment group while only 1 in the control group. The number of women who were employed but is not now is 4 is the treatment group and 3 in the control group. Due to the limited data size of around 350 and the insignificant differences in the changes in employment between the treatment and control group, this @tbl-empl cannot be decisive evidence in supporting correcting beliefs about others' feelings will affect the outcome of whether the married man's wife works. However, the tables fall more in favour of agreeing than disagreeing.
 
 ## Further Analysis
-In this section, the analysis will branch off from the original paper and explore the demographics of the men who support/oppose women working outside of home. We will first consider education as a factor that may determine support for WWOH. Research shows that one additional year of education reduces the probability of agreeing with women's traditional gender role @educ. This relationship in the existing data is explored in XX.
+In this section, the analysis will branch off from the original paper and explore the demographics of the men who support/oppose women working outside of home. We will first consider education as a factor that may determine support for WWOH. Research shows that one additional year of education reduces the probability of agreeing with women's traditional gender role @educ. This relationship in the existing data is explored in @fig-educ.
 
 ```{r}
 #| echo: false
 #| label: fig-educ
-#| fig-cap: Graph on the impact of education on supporting WWOH
-
-main_cleaned <- mainexp_raw_data |> clean_names() |> 
-  na.omit(age)|> mutate(
-  age_groups = case_when(
-  age <= 23 ~ 1,
-  age >= 30 ~ 3,
-  TRUE ~ 2)) |> filter(married == 1)
+#| fig-cap: Graphs on the Impact that Different levels of Education has on Supporting WWOH
+#| fig-subcap: ["Education Levels", "With/Without College Degree"]
+#| layout-nrows: 2
 
 eduimpact <- main_cleaned |> mutate(support = ifelse(
   outside_self == 1, "support", "oppose")) |>
-  mutate(edu_words = case_when(
-    
-  ))
+  mutate(degree = case_when(
+  college_deg == 0 ~ "No Degree",
+  college_deg == 1 ~ "Degree"))
+
+eduimpact <- eduimpact |> mutate(edul = case_when(
+  education == 3 ~ "Secondary",
+  education == 4 ~ "Middle",
+  education == 5 ~ "Diploma",
+  education == 6 ~ "Bachelor",
+  education == 7 ~ "Masters",
+  education == 8 ~ "Ph.D",
+  TRUE ~ "Post Graduate")) 
 
 eduimpact |>
-  ggplot(mapping = aes(x = education, fill = support)) +
+  ggplot(mapping = aes(x = fct_inorder(edul), fill = support)) +
   geom_bar() +
-  labs(x = "Age group", y = "Number of observations", fill = "Vote") +
+  labs(x = "Education Level", y = "Number of observations", fill = "Stance") +
+  theme(legend.position = "bottom")
+
+eduimpact |>
+  ggplot(mapping = aes(x = fct_inorder(degree), fill = support)) +
+  geom_bar() +
+  labs(x = "Education Level", y = "Number of observations", fill = "Stance") +
   theme(legend.position = "bottom")
 
 ```
+According to @fig-educ, the number of people that oppose women working outside of home do decrease with education as Diploma has one of the highest ratio of those that oppose. However, the ratio for Ph.D, and Post graduate are not obvious due to their significantly smaller number of participants. The next graph combines the participants into two bigger groups for better comparison. In with/without college degree graph, the men are separated into having/not having obtained a college degree as college is a big step in education that can differentiate people's views. From fig-educ, it is clear that most of the opposing participants have a Bachelor degree with the fewest having a Ph.D or Post Graduate Degree. This is due to having a bachelor degree is the most frequent in the population and does not indicate any correlation.
 
+This paper will further look at the demographics of age and how it affects the participants' stance on WWOH. 
+```{r}
+#| echo: false
+#| label: fig-age
+#| fig-cap: Graph on the Distribution of Age on the Stance of WWOH
 
+ageimpact <- main_cleaned |> mutate(support = ifelse(
+  outside_self == 1, "support", "oppose")) |>
+  mutate(age_bracket = case_when(
+  age <= 23 ~ "18 - 23",
+  age >= 30 ~ "30 - 35",
+  TRUE ~ "24 - 30"))
+
+ageimpact |>
+  ggplot(mapping = aes(x = age_bracket, fill = support)) +
+  geom_bar() +
+  labs(x = "Age Groups", y = "Number of observations", fill = "Stance") +
+  theme(legend.position = "bottom")
+
+```
+From @fig-age, there is a surprising trending of decreasing opposers of WWOH as Saudi Arabian men grew older.
 
 # Discussion {#sec-discussion}
 
