@@ -41,7 +41,14 @@ online_cleaned <-
 main_cleaned <-
   read_csv(
     file = here("data/analysis_data/main_cleaned.csv"))
+follow_cleaned <-
+  read_csv(
+    file = here("data/analysis_data/follow_cleaned.csv"))
+sec_cleaned <-
+   read_csv(
+    file = here("data/analysis_data/sec_cleaned.csv"))
 
+  
 ```
 
 \newpage
@@ -69,16 +76,19 @@ For this paper, our estimand is the difference between the married men's guess o
 ## Data source
 This analysis will be carried out in **R** @R using packages **tidyverse** @tidyverse, **dplyr** @dplyr, **ggplot2** @ggplot2, **knitr** @knitr, **here ** @here. The paper was published in the American Economic Review 2020, 110(10) issue between pages 2997-3029 @paper. The data was similarly uploaded at the same time and has not been updated since. There are two data sets out of others collected in the original research that this paper will utilize.
 
-The first data used in this analysis - "1st Online Survey Clean" - is sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through an online survey with a treatment group and a control group. This imported data contains 1460 observations and 21 variables.
-
-The second data used in this analysis - "Main Experiment Clean" - is also sourced from the replication package provided by Bursztyn et.al (2020). The data was collected by the researchers in the original paper through a more selective filtering process with an experiment conducted in-person with a treatment group and a control group. This data contains 500 observations and 36 variables.
+There are four data sets used in this paper. 1. "1st Online Survey Clean",  2. "2nd Online Survy Clean", 3. "Main Experiment Clean", and  4. "Follow Up Clean".
+The all four data sets are sourced from the replication package provided by Bursztyn et.al (2020) as they collected all the data in their research. The collection processes will be further explained in the following subsection.
 
 ## Measurement and collection
-"1st Online Survey Clean" will only be used to conduct analysis on the support of married Saudi Arabian men on women working outside of home. Therefore, its selection process is not extremely extensive. The qualifying characteristics are marriage status (married) and age (18-35). This survey was conducted nationally and anonymously. The other aspects of this survey is not further discussed as the data will not be used in this paper.
+"1st Online Survey Clean" will only be used to conduct analysis on the support of married Saudi Arabian men on women working outside of home. Therefore, its selection process is not extremely extensive. The qualifying characteristics are marriage status (married) and age (18-35). This survey was conducted nationally and anonymously. This imported data contains 1460 observations and 21 variables. However, the other aspects of this survey is not further discussed as the data will not be used in this paper.
 
-However, the main experiment data needs a more extensive examination. The sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper. The requirement for the men to sampled includes being married, having a cell phone (for easy reach and communication), and having minimum some kind of college education @paper. All qualifying subjects were invited to a hotel to conduct the experiment portion in-person. The men were separated into groups of 30 with the average participant knowing 15 out of the 29 of other participants @paper. They were then surveyed on WWOH and whether they would support their wives working outside of home. The research team then reveals the opinions of other participants in the room and distributes another survey on whether the participants would support their wives working outside of home. 
+Another data set used in our paper is the “Second Online Survey.” This survey was very similar to the first, targeted towards married men in Saudi Arabia. The survey contained 703 participants, all of whom were married 18-45 year olds and 20 variables. The researchers decided to increase the upper-bound in the hopes of reaching a larger sample. The survey was conducted from January to February 2020 and participants responded anonymously online. From this data set, the only relevant variable for our analysis will be the “discuss_freq” variable, which indicates how often married men talk about WWOH with their friends and colleagues.
+
+However, the main experiment data "Main Experiment Clean" needs a more extensive examination. The sampling for the experiment was conducted through a partnership between a local branch of an international survey company and Bursztyn et.al. They recruited 500 Saudi Arabia men between the ages of 18 and 35, living across Riyadh, Saudi Arabia @paper. The requirement for the men to sampled includes being married, having a cell phone (for easy reach and communication), and having minimum some kind of college education @paper. All qualifying subjects were invited to a hotel to conduct the experiment portion in-person. The men were separated into groups of 30 with the average participant knowing 15 out of the 29 of other participants @paper. They were then surveyed on WWOH and whether they would support their wives working outside of home. The research team then reveals the opinions of other participants in the room and distributes another survey on whether the participants would support their wives working outside of home. 
 
 Even though the data imported has already been cleaned, it is not in the state that can be directly used in this paper. The cleaning process will keep XX as they are relevant to replicate the targeted aspects and the following analysis. Additionally, the main experiment's raw data's sampling methodology also contains flaws. There is incongruity between what the paper claims the data to be and what the data shows. For example, although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The participants' highest education also ranges from a secondary degree to a doctorate degree even though the original paper claims that they sampled men with lowest college degree @paper. The secondary degree participants, however, will not be removed from the data set as they do not affect the purpose of the analysis, and further investigation on the effect of education on the support of WWOH will be conducted in @sec-results. The sample of 500 men with some removed due to empty data points and others due to attribute qualifications is quite small to be very representative of the male population in Saudi Arabia. The cleaned data will be further explored in @sec-explore.
+
+Lastly, the data set "Follow Up Clean" is information from the follow up survey that was conducted on the same sample as the main experiment three months alter. This survey is a phone call and the variables that will be used is to examine the change in the participants' wifes' employment since the main experiment. This data set contains 500 observations and 33 variables.
 
 
 ## Exploring the data {#sec-explore}
@@ -107,7 +117,6 @@ The variables are listed and explained below:
 main_cleaned |> slice(1:5) |> kable()
 
 ```
-
 
 
 # Results {#sec-results}
