@@ -31,7 +31,6 @@ online_cleaned$c_outside_self |> max() == 1
 online_cleaned$c_outside_self |> min() == 0
 
 # Main Cleaned Tests ##
-
 main_cleaned$education |> max() == 9
 main_cleaned$education |> min() == 3
 main_cleaned$age |> min() == 18
