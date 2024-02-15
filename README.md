@@ -24,4 +24,4 @@ The raw data from this paper is obtained from the published article from the Ame
 
 Link to the AEA website: https://www.aeaweb.org/articles?id=10.1257/aer.20180975
 Link to the replication project on Social Science Reproduction Platform: https://doi.org/10.48152/ssrp-1wa4-dk30
-- Replication graphs are in scripts, 99-replications.R.
+- Replication graphs are used throughout the paper and gathered in scripts, 99-replications.R.

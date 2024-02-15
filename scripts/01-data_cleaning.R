@@ -19,12 +19,15 @@ online_raw_data <- read_dta("data/raw_data/03_1st_online_svy_clean.dta")
 sec_raw_data <- read_dta("data/raw_data/04_2nd_online_svy_clean.dta")
 
 #taking out NA data from age variable as well as single men in the survey.
-main_cleaned <- mainexp_raw_data |> clean_names() |> 
-  na.omit(age)|> mutate(
+main_cleaned <- mainexp_raw_data |> clean_names() |> filter(married == 1) |>
+  mutate(
   age_groups = case_when(
   age <= 23 ~ 1,
   age >= 30 ~ 3,
-  TRUE ~ 2)) |> filter(married == 1)
+  TRUE ~ 2)) |> select(
+    age, education, outside_self, condition2, employed_now, college_deg,
+                    children, outside_wedge, age_groups) |> na.omit()
+  
 
 follow_cleaned <- follow_raw_data |> clean_names() |> 
   na.omit(age) |>

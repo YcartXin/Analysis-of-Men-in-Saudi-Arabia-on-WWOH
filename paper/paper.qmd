@@ -1,5 +1,5 @@
 ---
-title: "The Analysis of Pluralistic Ignorance of Married Men in Saudi Arabia on Women Working Outside of Home (WWOH) ^[Code and data are available at: https://github.com/YcartXin/Analysis-of-Men-in-Saudi-Arabia-on-WWOH]"
+title: "The Analysis of Pluralistic Ignorance of Married Men in Saudi Arabia on Women Working Outside of Home (WWOH) ^[Code and data are available at: https://github.com/YcartXin/Analysis-of-Men-in-Saudi-Arabia-on-WWOH; Reproduction DOI: https://doi.org/10.48152/ssrp-1wa4-dk30]"
 author: 
   - Tracy Yang
   - Alex Sun
@@ -89,21 +89,11 @@ However, the main experiment data "Main Experiment Clean" needs a more extensive
 
 Even though the data imported has already been cleaned, it is not in the state that can be directly used in this paper. The cleaning process will keep XX as they are relevant to replicate the targeted aspects and the following analysis. Additionally, the main experiment's raw data's sampling methodology also contains flaws. There is incongruity between what the paper claims the data to be and what the data shows. For example, although the experiment claims to have only recruited men who are married, the data shows otherwise and thus some data points will be further removed from the analysis. The participants' highest education also ranges from a secondary degree to a doctorate degree even though the original paper claims that they sampled men with lowest college degree @paper. The secondary degree participants, however, will not be removed from the data set as they do not affect the purpose of the analysis, and further investigation on the effect of education on the support of WWOH will be conducted in @sec-results. The sample of 500 men with some removed due to empty data points and others due to attribute qualifications is quite small to be very representative of the male population in Saudi Arabia. The cleaned data will be further explored in @sec-explore.
 
-Lastly, the data set "Follow Up Clean" is information from the follow up survey that was conducted on the same sample as the main experiment three months alter. This survey is a phone call and the variables that will be used is to examine the change in the participants' wifes' employment since the main experiment. This data set contains 500 observations and 33 variables.
+Lastly, the data set "Follow Up Clean" is information from the follow up survey that was conducted on the same sample as the main experiment three months alter. This survey is a phone call and the variables that will be used is to examine the change in the participants' wifes' employment since the main experiment as well as whether the husband was in the treatment or control group. This data set contains 500 observations and 33 variables.
 
 
 ## Exploring the data {#sec-explore}
-After the data cleaning process, irrelevant variables were removed along with empty responses. The online survey data now consists of only one variable with 728 observations. The variable signifies whether the respondent supports women working outside of home.
-
-@tbl-sampleonline shows what the online national survey data looks like after cleaning.
-
-```{r}
-#| echo: false
-#| label: tbl-sampleonline
-#| tbl-cap: Sample of Cleaned Online National Survey Data of Saudi Arabian Men on WWOH
-online_cleaned |> slice(1:5) |> kable()
-
-```
+After the data cleaning process, irrelevant variables were removed along with empty responses. The online survey data now consists of only one variable with 728 observations. The variable "c_outside_self" signifies whether the respondent supports women working outside of home. The follow up data now consists of 361 observations with three variables: "emply_prev", "emply_now", "condition2". The second main experiment data includes 702 observations and 1 variable as well, which is the frequency of discussion of WWOH issues.
 
 For the cleaned main experiment data, irrelevant variables and empty responses were also deleted. It now consists of XX observations with XX variables. 
 The variables are listed and explained below:
@@ -121,7 +111,9 @@ main_cleaned |> slice(1:5) |> kable()
 
 
 # Results {#sec-results}
-This section will first affirm the findings in the original paper with the cleaned data. As stated in @sec-intro, the three main claims made by Bursztyn et.al are:
+
+## Aanalysing origial paper
+This section will try to affirm the findings in the original paper with the cleaned data. As stated in @sec-intro, the three main claims made by Bursztyn et.al are:
 + The vast majority of married men in Saudi Arabia privately support WWOH.
 + The married men massively underestimate the level of support from other men in their communities.
 + Correcting these beliefs about others’ feelings will affect the outcome of whether the married man's wife work.
@@ -142,7 +134,7 @@ online_cleaned |>
 ```
 @fig-wwoh confirms that the majority of young married men in Saudi Arabia do support women working outside of home. Out of the 728 observations, around 600 chose in favour that "In my opinion, women should be allowed to work outside of the home" @paper. This signifies that the first claim is accurate.
 
-Starting from the second claim, we will be using the main experiment data. Before manipulating it into graphs and tables, we can first understand the cleaned data better with summary statistics. 
+Starting from the second claim, we will be using the main experiment data. Before manipulating it into graphs and tables, we can first understand the cleaned data better with summary statistics. The "condition2" variable separates the treatment and control groups.
 
 ```{r}
 #| echo: false
@@ -198,7 +190,7 @@ print(p)
 
 In @fig-time, from assessing the distribution of these wedges throughout all sessions, the data revealed that a substantial majority (72%) of the participants consistently undervalue the level of endorsement for WWOH within their session cohorts. On average, this wedge is observed to be a 24 percentage points difference, aligning very similarly with the conclusions drawn from the original paper @paper. Thus, the second claim of that married men massively underestimate the level of support from other men in their communities is further substantiated.
 
-The last claim this replication paper is going to focus on is that correcting beliefs about others' feelings will affect the outcome of whether the married man's wife works. In the main experiment done by Bursztyn et.al, a follow up survey three months later records the difference in the participant's wife's employment difference @paper. As the men experienced learning about others' surprisingly supportive views on WWOH during the first survey, this three-month difference in wifes' employments maybe attributed to the correcting of beliefs. The difference is shown in  below.
+The last claim this replication paper is going to focus on is that correcting beliefs about others' feelings will affect the outcome of whether the married man's wife works. In the main experiment done by Bursztyn et.al, a follow up survey three months later records the difference in the participant's wife's employment difference @paper. As the men experienced learning about others' surprisingly supportive views on WWOH during the first survey, this three-month difference in wifes' employments maybe attributed to the correcting of beliefs. The difference is shown in @tbl-empl below.
 
 
 ```{r}
@@ -215,7 +207,36 @@ follow_cleaned |> filter(condition2==0) |>
   count(emply_prev, emply_now) |> kable()
 
 ```
-As seen in @tbl-empl, there are slight differences between the treatment and control group in terms of the participants' wives employment since the first survey.
+As seen in @tbl-empl, there are slight differences between the treatment and control groups in terms of the participants' wives employment since the first survey. The number of women who moved from not working three months ago to now working is four in the treatment group while only 1 in the control group. The number of women who were employed but is not now is 4 is the treatment group and 3 in the control group. Due to the limited data size of around 350 and the insignificant differences in the changes in employment between the treatment and control group, this @tbl-empl cannot be decisive evidence in supporting correcting beliefs about others' feelings will affect the outcome of whether the married man's wife works. However, the tables fall more in favour of agreeing than disagreeing.
+
+## Further Analysis
+In this section, the analysis will branch off from the original paper and explore the demographics of the men who support/oppose women working outside of home. We will first consider education as a factor that may determine support for WWOH. Research shows that one additional year of education reduces the probability of agreeing with women's traditional gender role @educ. This relationship in the existing data is explored in XX.
+
+```{r}
+#| echo: false
+#| label: fig-educ
+#| fig-cap: Graph on the impact of education on supporting WWOH
+
+main_cleaned <- mainexp_raw_data |> clean_names() |> 
+  na.omit(age)|> mutate(
+  age_groups = case_when(
+  age <= 23 ~ 1,
+  age >= 30 ~ 3,
+  TRUE ~ 2)) |> filter(married == 1)
+
+eduimpact <- main_cleaned |> mutate(support = ifelse(
+  outside_self == 1, "support", "oppose")) |>
+  mutate(edu_words = case_when(
+    
+  ))
+
+eduimpact |>
+  ggplot(mapping = aes(x = education, fill = support)) +
+  geom_bar() +
+  labs(x = "Age group", y = "Number of observations", fill = "Vote") +
+  theme(legend.position = "bottom")
+
+```
 
 
 
